@@ -49,6 +49,8 @@ function getNewQuestion(){
         const optionIndex = availableOptions[Math.floor(Math.random()*availableOptions.length)];
         //get the position of optionindex from the available questions
         const index2 = availableOptions.indexOf(optionIndex);
+        console.log(optionIndex);
+        console.log(index2);
         //get position of of optionIndex from the availableOptions,so that the option does not repeat
         availableOptions.splice(index2,1);
         const option = document.createElement("div");
