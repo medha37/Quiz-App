@@ -110,6 +110,14 @@ function answersIndicator(){
 }
 function updateAnswerIndicator(markType){
     answersIndicatorContainer.children[questionCounter-1].classList.add(markType);
+    var icon;
+    if(markType === "correct"){
+        icon = '<i class="fa fa-check" aria-hidden="true"></i>';
+    }
+    else{
+        icon = '<i class="fa fa-times" aria-hidden="true"></i>';
+    }
+    answersIndicatorContainer.children[questionCounter-1].innerHTML = icon;
 
 }
 

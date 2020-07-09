@@ -178,14 +178,14 @@ body{
 }
 .quiz-box .answer-indicator div.correct{
     background-color: green;
-    background-image: url("right.jpg");
+    color:white;
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
 }
 .quiz-box .answer-indicator div.wrong{
     background-color:red;
-    background-image: url("wrong.png");
+    color:white;
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
