@@ -1,11 +1,17 @@
 const questionNumber = document.querySelector(".question-number");
 const questionText = document.querySelector(".question-text");
 const optionContainer = document.querySelector(".option-container");
+const answersIndicatorContainer = document.querySelector(".answer-indicator");
+const homeBox = document.querySelector(".home-box");
+const quizBox = document.querySelector(".quiz-box");
+const resultBox = document.querySelector(".result-box");
 
 let questionCounter = 0;
 let currentQuestion;
 let availableQuestions = [];
 let availableOptions = [];
+let correctanswers = 0;
+let attempt = 0;
 
 //push the question into availableQuestions array
 function setAvailableQuestions(){
@@ -60,22 +66,28 @@ function getNewQuestion(){
 //get the result of current attempt question
 function getResult(element){
     const id = parseInt(element.id);
-    //geet the answer by comparing the id of clicked option 
+    //get the answer by comparing the id of clicked option 
     if(id === currentQuestion.answer){
-        //set the green clr to the correct option 
+        //set the green color to the correct option 
         element.classList.add("correct");
+        //add the indicator to correct mark
+        updateAnswerIndicator("correct");
+        correctanswers++;
     }
     else{
-        //set the red clr to the incorrect option 
+        //set the red color to the incorrect option 
         element.classList.add("wrong");
+         //add the indicator to incorrect mark
+         updateAnswerIndicator("wrong");
         //if the answer is incorrect then show the correct ans by adding green clr 
         const optionLen = optionContainer.children.length;
         for(let i=0; i<optionLen; i++){
             if(parseInt( optionContainer.children[i].id) === currentQuestion.answer){
-                optionContainer.children[i].classList.add("correct");
+                optionContainer.children[i].classList.add("correct")
             }
         }
     }
+    attempt++;
     unclickableOptions();
 
 }
@@ -85,20 +97,87 @@ function unclickableOptions(){
     for(let i=0; i<optionLen; i++){
         optionContainer.children[i].classList.add("already-clicked");
     }
-};
+}
+
+function answersIndicator(){
+    const totalQuestion = quiz.length;
+    answersIndicatorContainer.innerHTML = '';
+    for(let i=0; i<totalQuestion; i++){
+        const indicator = document.createElement("div");
+        answersIndicatorContainer.appendChild(indicator);
+
+    }
+}
+function updateAnswerIndicator(markType){
+    answersIndicatorContainer.children[questionCounter-1].classList.add(markType);
+
+}
 
 function next(){
     if(questionCounter === quiz.length){
         console.log("quiz over");
+        quizOver();
     }
     else{
         getNewQuestion();
     }
 }
+ 
+function quizOver(){
+    //hide quiz box
+    quizBox.classList.add("hide");
+    // show result box
+    resultBox.classList.remove("hide");
+    quizResult();
+}
 
-window.onload = function(){
+function quizResult(){
+    resultBox.querySelector(".total-question").innerHTML = quiz.length;
+    resultBox.querySelector(".total-attempt").innerHTML = attempt;
+    resultBox.querySelector(".total-correct").innerHTML = correctanswers;
+    resultBox.querySelector(".total-wrong").innerHTML = attempt - correctanswers;
+    const percent = (correctanswers/quiz.length)*100;
+    resultBox.querySelector(".percentage").innerHTML = percent.toFixed(2) + "%";
+    resultBox.querySelector(".total-score").innerHTML = correctanswers +"/" + quiz.length;
+
+}
+
+function resetQuiz(){
+    questionCounter = 0;
+    correctanswers = 0;
+    attempt = 0;
+}
+
+function tryAgain(){
+    //hide the result box
+    resultBox.classList.add("hide");
+    //show the quiz box
+    quizBox.classList.remove("hide");
+    resetQuiz();
+    startQuiz();
+}
+
+function goToHome(){
+    //hide result box
+    resultBox.classList.add("hide");
+    //show home box
+    homeBox.classList.remove("hide");
+    resetQuiz();
+}
+// STARTING POINT
+function startQuiz(){
+    //hide home box
+    homeBox.classList.add("hide");
+    //show quiz box
+    quizBox.classList.remove("hide");
     //first we will set all the question in availableQuestions  array
     setAvailableQuestions();
     //second we will getQuestion() function
     getNewQuestion(); 
+    //to create indicator of answers
+    answersIndicator();
+}
+
+window.onload = function(){
+    homeBox.querySelector(".total-question").innerHTML = quiz.length;
 }

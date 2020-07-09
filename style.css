@@ -20,6 +20,17 @@ body{
     margin:40px auto;
     padding: 30px;
     border-radius: 10px;
+    animation: fadeInRight 1s ease;
+}
+@keyframes fadeInRight{
+    0%{
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 1;
+    }
 }
 .custom-box::before,
 .custom-box::after{
@@ -164,7 +175,20 @@ body{
     border-radius: 50%;
     margin-right: 3px;
     margin-top: 15px;
-
+}
+.quiz-box .answer-indicator div.correct{
+    background-color: green;
+    background-image: url("right.jpg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.quiz-box .answer-indicator div.wrong{
+    background-color:red;
+    background-image: url("wrong.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .result-box{
     text-align: center;
@@ -197,4 +221,12 @@ body{
 .btn:hover{
     background-color:#74ebd5;
     color:white;
+}
+@media(max-width:767px){
+    .result-box .btn{
+        margin-bottom: 15px;
+    }
+    body{
+        padding:15px;
+    }
 }
