@@ -23,5 +23,30 @@ const quiz = [
         q:'Which of the following is not an input device?',
         options: ['Mouse ' , 'Light pen' , 'Keyboard' , ' VDU'],
         answer: 3
-    }    
+    },
+    {
+        q:'One Gigabyte is approximately equal is:',
+        options: ['1000,000 bytes' , '1000,000,000 bytes' , '1000,000,000,000 bytes' , ' None of these'],
+        answer: 1
+    },
+    {
+        q:' Compact discs, (according to the original CD specifications) hold how many minutes of music?',
+        options: [' 74 mins' , '90 mins' , '56 mins' , '60 mins'],
+        answer: 0
+    },
+    {
+        q:' What type of process creates a smaller file that is faster to transfer over the internet?',
+        options: ['Compression' , 'Fragmentation' , 'Encapsulation' , ' None of the above'],
+        answer: 0
+    },
+    {
+        q:'Which of the following is used to Manage DataBase?',
+        options: ['Operating System' , 'Compiler' , 'DBMS' , ' None of the above'],
+        answer: 2
+    }, 
+    {
+        q:' Which of the following is an example of non-volatile memory?',
+        options: ['Cache memory' , ' RAM' , 'ROM' , ' None of the above'],
+        answer: 2
+    }                                
 ]
