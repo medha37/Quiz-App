@@ -35,6 +35,25 @@ app.get("/",function(req,res){
     res.render("quiz");
 });
 
+//List of questions
+app.get("/questions",function(req,res){
+
+});
+
+//Add question form
+app.get("/questions/new",function(req,res){
+
+});
+
+//Add question to database
+app.post("/questions",function(req,res){
+
+});
+
+//Delete a question
+app.delete("/questions/:qid",function(req,res){
+
+});
 
 
 
