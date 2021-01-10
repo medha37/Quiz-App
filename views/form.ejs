@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <form>
+        <form action="/questions" method="POST">
             <h2>Add A Question:</h2>
             <h3>Question:</h3>
-            <textarea rows="4" cols="50" form="usrform"></textarea><br>
+            <input type="text" name="ques"></input><br>
             <label for="opt1">Option 1:</label><br>
-            <input type="text"><br>
-            <label for="opt2">option 2:</label><br>
-            <input type="text"><br>
+            <input type="text" name="op1"><br>
+            <label for="opt2">Option 2:</label><br>
+            <input type="text" name="op2"><br>
             <label for="opt3">Option 3:</label><br>
-            <input type="text"><br>
-            <label for="opt4">option 4:</label><br>
-            <input type="text"><br><br>
+            <input type="text" name="op3"><br>
+            <label for="opt4">Option 4:</label><br>
+            <input type="text" name="op4"><br><br>
             <label for="quantity">Correct Answer:</label>
             <input type="number" name="ans" min="1" max="4"><br><br>
 

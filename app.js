@@ -1,12 +1,14 @@
 //requiring packages
 const express   = require("express"),
       app       = express(),
+      bodyParser = require("body-parser"),
       mongoose  = require("mongoose");
 
 
 //setup
 app.set("view engine","ejs");
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // database connection
 // mongoose.connect("mongodb+srv://dbuser:dbpassword@cluster0.l4plx.mongodb.net/test?retryWrites=true&w=majority",
@@ -25,7 +27,7 @@ app.use(express.static("public"));
 // });
 // // Compile into model
 // let Question = mongoose.model("Question", questionSchema);
-const quiz = [
+let quiz = [
   {
       q:'Which is the part of the computer system that one can physically touch?',
       options: ['data' , 'operating systems ' , 'hardware' , 'software'],
@@ -88,7 +90,7 @@ app.get("/",function(req,res){
 
 //List of questions
 app.get("/questions",function(req,res){
-  res.render("questions",{questions:quiz});
+  res.render("questions", { questions:quiz });
 });
 
 //Add question form
@@ -98,7 +100,17 @@ app.get("/questions/new",function(req,res){
 
 //Add question to database
 app.post("/questions",function(req,res){
+  var newQ = {
+    q: req.body.ques,
+    options: [req.body.op1 , req.body.op2 , req.body.op3 , req.body.op4],
+    answer: Number(req.body.ans)-1
+};
 
+  quiz.push(newQ);
+
+  // console.log(quiz);
+
+  res.redirect("/questions");
 });
 
 //Delete a question
