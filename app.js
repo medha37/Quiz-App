@@ -90,11 +90,15 @@ app.get("/",function(req,res){
 
 //List of questions
 app.get("/questions",function(req,res){
-  res.render("questions", { questions:quiz });
+    // FIND all questions then 
+    // render questions list
+
+    res.render("questions", { questions:quiz });
 });
 
 //Add question form
 app.get("/questions/new",function(req,res){
+    // render add question form
     res.render("form");
 });
 
@@ -108,14 +112,31 @@ app.post("/questions",function(req,res){
 
   quiz.push(newQ);
 
-  // console.log(quiz);
+  // CREATE question
+  // if error redirect form again
+  // else redirect to questions list
 
   res.redirect("/questions");
 });
 
+app.get("/questions/:qid/edit", function(req, res) {
+    // findById the question and
+    // render edit question form
+    // along with the question's data
+
+});
+
+app.put("/questions/:qid", function(req, res) {
+    // findByIdAndUpdate the question
+    // after that redirect to qustions list
+
+});
+
 //Delete a question
 app.delete("/questions/:qid",function(req,res){
-
+    // findByIdAndRemove the question
+    // after that redirect to qustions list
+    
 });
 
 
