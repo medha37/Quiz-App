@@ -90,12 +90,31 @@ app.get("/questions/:qid/edit", function(req, res) {
     // findById the question and
     // render edit question form
     // along with the question's data
+    Question.findById(req.params.qid,function(err,question){
+        if(err)
+          res.redirect("/questions");
+          else {
+              res.render("editForm",{question: question});
+          }
+    });
 
 });
 
 app.put("/questions/:qid", function(req, res) {
     // findByIdAndUpdate the question
     // after that redirect to qustions list
+    var updatedQ = {
+        q:       req.body.ques,
+        options: [req.body.op1 , req.body.op2 , req.body.op3 , req.body.op4],
+        answer:  Number(req.body.ans) - 1
+    };
+    Question.findByIdAndUpdate(req.params.qid , updatedQ , function(err , question){
+        if(err)
+         res.redirect("/questions/"+req.params.qid+"/edit");
+         else{
+            res.redirect("/questions");
+         }
+    });
 
 });
 

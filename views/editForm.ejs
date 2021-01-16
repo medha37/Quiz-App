@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <form action="/questions/<%= question._id%>?_method=put" method="POST">
+            <h2>Edit Question:</h2>
+            <h3>Question:</h3>
+            <textarea name="ques" cols="30" rows="10"><%= question.q%></textarea><br>
+            <label for="opt1">Option 1:</label><br>
+            <input type="text" name="op1" value="<%= question.options[0] %>"><br>
+            <label for="opt2">Option 2:</label><br>
+            <input type="text" name="op2"value="<%= question.options[1] %>"><br>
+            <label for="opt3">Option 3:</label><br>
+            <input type="text" name="op3"value="<%= question.options[2] %>"><br>
+            <label for="opt4">Option 4:</label><br>
+            <input type="text" name="op4"value="<%= question.options[3] %>"><br><br>
+            <label for="quantity">Correct Answer:</label>
+            <input type="number" name="ans" min="1" max="4"value="<%= question.answer+1 %>"><br><br>
+
+            <input type="submit" value="Update">
+
+
+        </form>
+    </body>
+</html>
