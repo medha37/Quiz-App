@@ -70,7 +70,6 @@ app.post("/questions",function(req,res){
 };
 
 
-
   // CREATE question
   // if error redirect form again
   // else redirect to questions list
@@ -86,6 +85,7 @@ app.post("/questions",function(req,res){
   
 });
 
+// render edit form for a question
 app.get("/questions/:qid/edit", function(req, res) {
     // findById the question and
     // render edit question form
@@ -100,6 +100,7 @@ app.get("/questions/:qid/edit", function(req, res) {
 
 });
 
+// update question database
 app.put("/questions/:qid", function(req, res) {
     // findByIdAndUpdate the question
     // after that redirect to qustions list
