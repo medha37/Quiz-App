@@ -15,7 +15,7 @@ body{
     outline: none;
 }
 .custom-box{
-    max-width: 700px;
+    max-width: 800px;
     background-color:white;
     margin:40px auto;
     padding: 30px;
@@ -225,4 +225,51 @@ body{
     body{
         padding:15px;
     }
+}
+
+/* ......... questions.ejs..........*/
+.btn-hide { 
+    cursor: pointer; 
+    display:inline-block;
+    border: 0px; 
+    background-color: transparent; 
+    height: 20px; 
+    width: 20px; 
+    font-size: 1.5em; 
+} 
+
+.btn-red{
+    color: rgb(209, 18, 18);
+}
+
+.btn-green{
+    color: rgb(117, 172, 9);
+}
+
+.Q-container{
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.Q-ques{
+    display: block;
+    width: 85%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.Q-options{
+    display: flex;
+    width: 15%;
+    
+}
+
+.Q-options-inner{
+    /* display: flex;
+    width: 50%;*/
+    margin:0 auto; 
+    display: flex;
+    align-items: center;
 }
