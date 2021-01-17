@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheet/style.css">
-    <title>Document</title>
-</head>
+<%- include("partials/header") %> 
     <body>
         <div class = "quiz-box custom-box">
             <form action="/questions/<%= question._id%>?_method=put" method="POST">
@@ -31,4 +23,4 @@
             </form>
         </div>
     </body>
-</html>
+<%- include("partials/footer") %> 

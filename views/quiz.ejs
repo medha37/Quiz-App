@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Quiz App</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="/stylesheet/style.css">
-    </head>
+<%- include("partials/header") %> 
     <body>
     <div class="home-box custom-box">
         <h1>Instruction:</h1>
@@ -61,7 +53,9 @@
         <button type="button" class="btn" onclick="tryAgain()"><i class="fa fa-hand-o-left" aria-hidden="true"></i> &nbsp;&nbsp;Try Again</button>
         <button type="button" class="btn" onclick="goToHome()">Go To Home &nbsp;&nbsp;<i class="fa fa-home" aria-hidden="true"></i></button>
     </div>
-    <script type="text/javascript" src="js/question.js"></script>
+    <script type="text/javascript">
+        const quiz = <%- JSON.stringify(questions) %>;
+    </script>
     <script type="text/javascript" src="js/questionScript.js"></script>
     </body>
-</html>
+<%- include("partials/footer") %> 

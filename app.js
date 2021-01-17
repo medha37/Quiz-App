@@ -2,7 +2,8 @@
 const express   = require("express"),
       app       = express(),
       bodyParser = require("body-parser"),
-     methodOverride = require('method-override'),
+      methodOverride = require('method-override'),
+      expressSanitizer = require("express-sanitizer"),
       mongoose  = require("mongoose");
 
 
@@ -11,6 +12,7 @@ app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 
 // database connection
  mongoose.connect("mongodb+srv://dbuser:dbpassword@cluster0.l4plx.mongodb.net/test?retryWrites=true&w=majority",
@@ -36,7 +38,16 @@ let Question = mongoose.model("Question", questionSchema);
 
 //dashboard
 app.get("/",function(req,res){
-    res.render("quiz");
+    // find all questions 
+    // then render dashboard
+    Question.find({}, function(err, questions) {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render("quiz", {questions: questions});
+        }
+    });
+    
 });
 
 //List of questions
@@ -63,26 +74,66 @@ app.get("/questions/new",function(req,res){
 
 //Add question to database
 app.post("/questions",function(req,res){
-  var newQ = {
-    q: req.body.ques,
-    options: [req.body.op1 , req.body.op2 , req.body.op3 , req.body.op4],
-    answer: Number(req.body.ans)-1
-};
 
+    // sanitize text inputs to remove script tags if any
+    var q = req.sanitize(req.body.ques);
+    var op1 = req.sanitize(req.body.op1);
+    var op2 = req.sanitize(req.body.op2);
+    var op3 = req.sanitize(req.body.op3);
+    var op4 = req.sanitize(req.body.op4);
 
-  // CREATE question
-  // if error redirect form again
-  // else redirect to questions list
+    // check question input
+    // it must be non null & max length 150
+    var ques_check = false;
+    if(q !== "" && q !== undefined) {
+        ques_check = true;
+    }
+    if(ques_check)
+        q = q.substring(0, Math.min(150, q.length));
 
-  Question.create(newQ,function(err,createdQ){
-      if(err)
-         res.redirect("/questions/new");
-        else{
-            res.redirect("/questions");
-        }
-  });
+    // check for options
+    var options_check = false;
+    if(op1 !== "" && op1 !== undefined &&
+        op2 !== "" && op2 !== undefined &&
+        op3 !== "" && op3 !== undefined &&
+        op4 !== "" && op4 !== undefined
+    ) {
+        options_check = true;
+    }
 
-  
+    if(options_check) {
+        op1 = op1.substring(0, Math.min(50, op1.length));
+        op2 = op2.substring(0, Math.min(50, op2.length));
+        op3 = op3.substring(0, Math.min(50, op3.length));
+        op4 = op4.substring(0, Math.min(50, op4.length));
+    }
+
+    // check answer constraints
+    var ans = Number(req.body.ans);
+    var ans_check = false;
+    if(ans >= 1 && ans <= 4) {
+        ans_check = true;
+    }
+
+    if(ques_check && options_check && ans_check) {
+        var newQ = {
+            q: q,
+            options: [op1 , op2 , op3 , op4],
+            answer: ans-1
+        };    
+        
+        // CREATE question
+        // if error redirect form again
+        // else redirect to questions list
+    
+        Question.create(newQ,function(err,createdQ){
+            if(err)
+                res.redirect("/questions/new");
+            else{
+                res.redirect("/questions");
+            }
+        });
+    } else res.redirect("/questions/new");
 });
 
 // render edit form for a question

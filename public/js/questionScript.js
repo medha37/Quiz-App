@@ -17,7 +17,7 @@ let attempt = 0;
 function setAvailableQuestions(){
     const totalQuestion = quiz.length;
     for(let i=0; i<totalQuestion; i++){
-        availableQuestions.push(quiz[i]) 
+        availableQuestions.push(quiz[i]); 
     }
 } 
 //set question number and question and options
@@ -49,8 +49,6 @@ function getNewQuestion(){
         const optionIndex = availableOptions[Math.floor(Math.random()*availableOptions.length)];
         //get the position of optionindex from the available questions
         const index2 = availableOptions.indexOf(optionIndex);
-        console.log(optionIndex);
-        console.log(index2);
         //get position of of optionIndex from the availableOptions,so that the option does not repeat
         availableOptions.splice(index2,1);
         const option = document.createElement("div");
@@ -125,7 +123,6 @@ function updateAnswerIndicator(markType){
 
 function next(){
     if(questionCounter === quiz.length){
-        console.log("quiz over");
         quizOver();
     }
     else{
