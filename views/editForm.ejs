@@ -5,17 +5,17 @@
                 <h2>Edit Question:</h2>
                 <div class = "form-container">
                     <h3>Question</h3>
-                    <textarea name="ques" cols="30" rows="5"maxlength="150"><%= question.q%></textarea><br>
+                    <textarea name="ques" cols="30" rows="5"maxlength="150" required><%= question.q%></textarea><br>
                     <label for="opt1"><strong>Option 1</strong></label><br>
-                    <input type="text" name="op1" maxlength="50" value="<%= question.options[0] %>"><br>
+                    <input type="text" name="op1" maxlength="50" value="<%= question.options[0] %>" required><br>
                     <label for="opt2"><strong>Option 2</strong></label><br>
-                    <input type="text" name="op2" maxlength="50" value="<%= question.options[1] %>"><br>
+                    <input type="text" name="op2" maxlength="50" value="<%= question.options[1] %>" required><br>
                     <label for="opt3"><strong>Option 3</strong></label><br>
-                    <input type="text" name="op3" maxlength="50" value="<%= question.options[2] %>"><br>
+                    <input type="text" name="op3" maxlength="50" value="<%= question.options[2] %>" required><br>
                     <label for="opt4"><strong>Option 4</strong></label><br>
-                    <input type="text" name="op4" maxlength="50" value="<%= question.options[3] %>"><br>
+                    <input type="text" name="op4" maxlength="50" value="<%= question.options[3] %>" required><br>
                     <label for="quantity"><strong>Correct Answer</strong></label>
-                    <input type="number" name="ans" min="1" max="4"value="<%= question.answer+1 %>"><br>
+                    <input type="number" name="ans" min="1" max="4"value="<%= question.answer+1 %>" required><br>
 
                     <input type="submit" value="Update" class = "btn">
                 </div>

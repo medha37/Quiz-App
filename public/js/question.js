@@ -16,7 +16,7 @@ const quiz = [
     },
     {
         q:'Which of the following is not an example of an Operating System?',
-        options: ['Windows 98 ' , 'BSD Unix' , 'Microsoft Office XP' , 'Red Hat Linux'],
+        options: ['Windows 98 ' , 'BSD Unix' , ' Microsoft Office XP' , 'Red Hat Linux'],
         answer: 2
     },
     {

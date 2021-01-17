@@ -153,20 +153,64 @@ app.get("/questions/:qid/edit", function(req, res) {
 
 // update question database
 app.put("/questions/:qid", function(req, res) {
+    //senitize all text inputs
+    var q = req.sanitize(req.body.ques);
+    var op1 = req.sanitize(req.body.op1);
+    var op2 = req.sanitize(req.body.op2);
+    var op3 = req.sanitize(req.body.op3);
+    var op4 = req.sanitize(req.body.op4);
+    // check question input
+    // it must be non null & max length 150
+    var ques_check = false;
+    if(q !== "" && q !== undefined) {
+        ques_check = true;
+    }
+    if(ques_check)
+        q = q.substring(0, Math.min(150, q.length));
+
+    // check for options
+    var options_check = false;
+    if(op1 !== "" && op1 !== undefined &&
+        op2 !== "" && op2 !== undefined &&
+        op3 !== "" && op3 !== undefined &&
+        op4 !== "" && op4 !== undefined
+    ) {
+        options_check = true;
+    }
+
+    if(options_check) {
+        op1 = op1.substring(0, Math.min(50, op1.length));
+        op2 = op2.substring(0, Math.min(50, op2.length));
+        op3 = op3.substring(0, Math.min(50, op3.length));
+        op4 = op4.substring(0, Math.min(50, op4.length));
+    }
+
+    // check answer constraints
+    var ans = Number(req.body.ans);
+    var ans_check = false;
+    if(ans >= 1 && ans <= 4) {
+        ans_check = true;
+    }
+    //if all input checks are correct then 
     // findByIdAndUpdate the question
     // after that redirect to qustions list
-    var updatedQ = {
-        q:       req.body.ques,
-        options: [req.body.op1 , req.body.op2 , req.body.op3 , req.body.op4],
-        answer:  Number(req.body.ans) - 1
-    };
-    Question.findByIdAndUpdate(req.params.qid , updatedQ , function(err , question){
-        if(err)
-         res.redirect("/questions/"+req.params.qid+"/edit");
-         else{
-            res.redirect("/questions");
-         }
-    });
+    if(ques_check && options_check && ans_check) {
+        var updatedQ = {
+            q: q,
+            options: [op1 , op2 , op3 , op4],
+            answer: ans-1
+        };    
+
+        Question.findByIdAndUpdate(req.params.qid , updatedQ , function(err , question){
+            if(err)
+            res.redirect("/questions/"+req.params.qid+"/edit");
+            else{
+                res.redirect("/questions");
+            }
+        });
+    } else{
+        res.redirect("/questions/"+req.params.qid+"/edit");
+    }
 
 });
 
