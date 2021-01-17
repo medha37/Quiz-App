@@ -1,24 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheet/style.css">
+    <title>Document</title>
+</head>
     <body>
-        <form action="/questions/<%= question._id%>?_method=put" method="POST">
-            <h2>Edit Question:</h2>
-            <h3>Question:</h3>
-            <textarea name="ques" cols="30" rows="10"><%= question.q%></textarea><br>
-            <label for="opt1">Option 1:</label><br>
-            <input type="text" name="op1" value="<%= question.options[0] %>"><br>
-            <label for="opt2">Option 2:</label><br>
-            <input type="text" name="op2"value="<%= question.options[1] %>"><br>
-            <label for="opt3">Option 3:</label><br>
-            <input type="text" name="op3"value="<%= question.options[2] %>"><br>
-            <label for="opt4">Option 4:</label><br>
-            <input type="text" name="op4"value="<%= question.options[3] %>"><br><br>
-            <label for="quantity">Correct Answer:</label>
-            <input type="number" name="ans" min="1" max="4"value="<%= question.answer+1 %>"><br><br>
+        <div class = "quiz-box custom-box">
+            <form action="/questions/<%= question._id%>?_method=put" method="POST">
+                <h2>Edit Question:</h2>
+                <div class = "form-container">
+                    <h3>Question</h3>
+                    <textarea name="ques" cols="30" rows="5"maxlength="150"><%= question.q%></textarea><br>
+                    <label for="opt1"><strong>Option 1</strong></label><br>
+                    <input type="text" name="op1" maxlength="50" value="<%= question.options[0] %>"><br>
+                    <label for="opt2"><strong>Option 2</strong></label><br>
+                    <input type="text" name="op2" maxlength="50" value="<%= question.options[1] %>"><br>
+                    <label for="opt3"><strong>Option 3</strong></label><br>
+                    <input type="text" name="op3" maxlength="50" value="<%= question.options[2] %>"><br>
+                    <label for="opt4"><strong>Option 4</strong></label><br>
+                    <input type="text" name="op4" maxlength="50" value="<%= question.options[3] %>"><br>
+                    <label for="quantity"><strong>Correct Answer</strong></label>
+                    <input type="number" name="ans" min="1" max="4"value="<%= question.answer+1 %>"><br>
 
-            <input type="submit" value="Update">
+                    <input type="submit" value="Update" class = "btn">
+                </div>
 
-
-        </form>
+            </form>
+        </div>
     </body>
 </html>
