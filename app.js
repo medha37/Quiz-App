@@ -15,7 +15,7 @@ app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 
 // database connection
- mongoose.connect("mongodb+srv://dbuser:dbpassword@cluster0.l4plx.mongodb.net/test?retryWrites=true&w=majority",
+ mongoose.connect("mongodb+srv://<user>:<password>@cluster0.l4plx.mongodb.net/test?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
